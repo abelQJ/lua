@@ -467,6 +467,7 @@ void luaD_call (lua_State *L, StkId func, int nresults) {
       }
       lua_unlock(L);
       n = (*f)(L);  /* do the actual call */
+      //stack:func,arg1,arg2,arg3,... + LUA_MINSTACK
       lua_lock(L);
       api_checknelems(L, n);
       luaD_poscall(L, ci, n);
@@ -478,6 +479,7 @@ void luaD_call (lua_State *L, StkId func, int nresults) {
       int narg = cast_int(L->top - func) - 1;  /* number of real arguments */
       int nfixparams = p->numparams;
       int fsize = p->maxstacksize;  /* frame size */
+      //这个包含了参数
       checkstackp(L, fsize, func);
       ci = next_ci(L);
       ci->nresults = nresults;

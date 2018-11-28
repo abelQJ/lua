@@ -48,7 +48,10 @@ const char lua_ident[] =
 /* test for upvalue */
 #define isupvalue(i)		((i) < LUA_REGISTRYINDEX)
 
-
+//a.正数，实际的栈空间
+//b.负数，非伪造
+//c.伪造1，模块注册table
+//d.upvalue的索引，upvalue会有open和close的状态
 static TValue *index2value (lua_State *L, int idx) {
   CallInfo *ci = L->ci;
   if (idx > 0) {

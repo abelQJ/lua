@@ -365,6 +365,7 @@ typedef union UTString {
 */
 #define getstr(ts)  \
   check_exp(sizeof((ts)->extra), cast_charp((ts)) + sizeof(UTString))
+  //字符串的内容在其结构紧跟着的位置
 
 
 /* get the actual string (array of bytes) from a Lua value */
@@ -686,6 +687,7 @@ typedef struct Table {
   unsigned int alimit;  /* "limit" of 'array' array */
   TValue *array;  /* array part */
   Node *node;
+  //底层居然是个链表？为了省内存么
   Node *lastfree;  /* any free position is before this position */
   struct Table *metatable;
   GCObject *gclist;
